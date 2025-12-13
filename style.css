@@ -1,0 +1,319 @@
+:root {
+    --font-color: rgb(23, 23, 23);
+    --percent-color: rgb(30, 147, 106);
+    --font-family: inter;
+    --main-bg: rgb(245, 245, 245);
+    --body-bg: rgb(255, 255, 255);
+    --divs-color: rgba(206, 230, 252, 0.1);
+}
+
+html {
+    box-sizing: border-box;
+    background-color: var(--main-bg);
+}
+
+*, 
+*::before, 
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.main-dashboard-container {
+    width: inherit;
+    height: inherit;
+    background-color: var(--body-bg);
+    /* Now for the grid display */
+    display: grid;
+    grid-template-areas: "nav nav"
+    "side-menu main-dash";
+    /* columns */
+    grid-template-columns: [side-start] 300px
+    [side-end dash-start] 1fr
+    [dash-end];
+    /* Rows */
+    grid-template-rows: [nav-start] 100px
+    [nav-end dash-body-start] 1fr
+    [dash-body-end];
+}
+
+/* ---------------------------------------------------------------------------------- */
+
+.nav-section {
+    grid-area: nav;
+    border-bottom: 1px solid rgb(222, 221, 221);
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(215, 231, 246, 0.5);
+    background-image: url(./images/menu-left.png);
+    background-size: contain;
+    border: none;
+    border-radius: 50px;
+    margin-left: 4%;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.search-bar {
+    width: 45%;
+    height: 45px;
+    border: 1px solid rgb(237, 236, 236);
+    border-radius: 15px; 
+    overflow: auto;
+    margin-left: 85px;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.imageholder {
+    width: 50px;
+    height: 100%;
+    position: relative;
+    border-right: 1px solid rgb(237, 236, 236);
+
+    img {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 8px;
+        left: 10px;
+    }
+}
+
+
+.search-bar input {
+    width: 595px;
+    height: 95%;
+    border: none;
+    outline: none;
+
+    &:focus {
+        outline: 2px solid #1a73e8; /* blue focus */
+        outline-offset: 2px;        /* pushes the blue outside */
+    }
+}
+
+.personal-info {
+    width: 15%;
+    height: 50px;
+    margin-right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-image: linear-gradient(
+        47deg,
+        rgba(215, 231, 246, 0.5),
+        rgba(59, 155, 245, 0.5),
+        rgb(113, 181, 236),
+        rgb(237, 105, 105),
+        rgba(252, 147, 102, 0.5),
+        rgb(255, 255, 255)
+    );
+    border-radius: 15px;
+
+    img {
+        width: 40px;
+        height: 40px;
+        box-sizing: content-box;
+        border-left: 1px solid;
+        padding-left: 5px;
+    }
+
+    p {
+        margin-left: 10px;
+        font-size: 1.1rem;
+        font-weight: 450;
+    }
+}
+
+/* -------------------------------------------------------------------------------------- */
+
+.menu {
+    grid-row: dash-body-start / dash-body-end;
+    grid-column-start: side-start;
+    grid-column-end: side-end; 
+    background-color: var(--body-color);
+
+    .menu-components {
+        width: 100%;
+        height: 45%;
+        margin-top: 25px;
+        
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+    }
+}
+
+.menu_items {
+    margin: 0;
+    padding: 0;
+    width: 250px;
+    border-radius: 20px;
+    margin-left: 30px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgba(215, 231, 246, 0.5);
+    }
+}
+
+.menu_items img {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    top: 10px;
+    left: 20px;
+}
+
+.menu_items p {
+    font-size: 1.3rem;
+    font-weight: 400;
+    display: inline-block;
+    position: relative;
+    left: 40px;
+    color: rgba(116, 115, 115, 0.9);
+}
+
+/* ---------------------------------------------------------------------------------------- */
+
+.dash-body {
+    grid-column: dash-start / dash-end;
+    grid-row: dash-body-start / dash-body-end;
+    background-color: rgb(249, 249, 249);
+}
+
+.dash-body > .container {
+    /* border: 1px solid #1a73e8; */
+    width: 90%;
+    height: 100%;
+    margin-left: 80px;
+    display: grid;
+    /* The columns' template */
+    grid-template-columns: [overview-start] 1fr
+    [overview-end users-count-start] 350px 
+    [users-count-end];
+    /* The rows' template */
+    grid-template-rows: [title-start] 75px
+    [title-end users-start] 160px
+    [users-end activity-start] 150px
+    [activity-end revenue-start] 220px
+    [revenue-end];
+    gap: 15px;
+}
+
+.text {
+    grid-row: title-start / title-end;
+    grid-column: overview-start / users-count-end;
+
+    p {
+        font-size: 2.5rem;
+        font-weight: bold;
+        position: relative;
+        bottom: 20px;
+        margin-left: 10px;
+    }
+}
+
+.sales {
+    grid-column: overview-start / overview-end;
+    grid-row: users-start / activity-end;
+}
+
+.users {
+    grid-column: users-count-start / users-count-end;
+    grid-row: users-start / users-end;
+}
+
+.activity {
+    grid-column: users-count-start / users-count-end;
+    grid-row: activity-start / revenue-end;
+}
+
+.revenue {
+    grid-column: overview-start / overview-end;
+    grid-row: revenue-start / revenue-end;
+}
+
+.sales, .users, .activity, .revenue {
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+
+    p {
+        font-size: 1.4rem;
+        margin-left: 25px;
+    }
+}
+
+.sales img {
+    width: 500px;
+    height: 250px;
+    position: relative;
+    left: 60px;
+    bottom: 10px;
+    border-radius: 15px;
+}
+
+.users p.one {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.users p.two {
+    font-size: 1.4rem;
+    color: var(--percent-color);
+    margin-top: -15px;
+}
+
+.revenue p.first {
+    font-size: 2.5rem;
+    font-weight: 500;
+}
+
+.revenue p.second {
+    margin-left: 30px;
+    margin-top: -25px;
+    color: var(--percent-color);
+    font-size: 1.8rem;
+}
+
+.activity .categories, .names{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    border-bottom: 0.5px solid rgb(171, 171, 171);
+    margin-top: 15px;
+
+    p {
+        margin-right: 15px;
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: rgb(78, 77, 77);
+    }
+}
+
+.names:last-child {
+    border: none;
+}
